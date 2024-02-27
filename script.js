@@ -44,10 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
     timeElement.textContent = elapsedTime;
   }
 
-  function startNewGame() {
-    location.reload();
-  }
-
   function endGame() {
     newGameBtn.style.display = "block";
     const elapsedTime = parseInt(timeElement.textContent);
@@ -149,3 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
   displayHighscores(storedHighscores);
 });
+
+function startNewGame() {
+  location.reload();
+}
