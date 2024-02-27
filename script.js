@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let matches = 0;
   let startTime = 0;
   let endTime = 0;
-  let isFlipping = false; // Variable, um zu überprüfen, ob bereits zwei Karten aufgedeckt sind
+  let isFlipping = false;
+  let progressPercentage = 0; // Setze den Fortschritt zu Beginn auf 0
 
   const progressBar = document.getElementById("progress-bar");
   const timeElement = document.getElementById("time-value");
@@ -45,9 +46,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function endGame() {
-    newGameBtn.style.display = "block";
     const elapsedTime = parseInt(timeElement.textContent);
+    const highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+    const placement = getPlacement(highscores, elapsedTime);
+
+    alert(
+      `Game Over!\nYour time: ${elapsedTime} seconds\nPlacement: ${placement}`
+    );
+    newGameBtn.style.display = "block";
+
     addToHighscore(elapsedTime);
+    displayHighscores(highscores);
+  }
+
+  function getPlacement(highscores, currentTime) {
+    const sortedHighscores = [...highscores, currentTime].sort((a, b) => a - b);
+    const placement = sortedHighscores.indexOf(currentTime) + 1;
+
+    return placement;
   }
 
   function addToHighscore(time) {
@@ -55,22 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
     highscores.push(time);
     highscores.sort((a, b) => a - b);
 
-    // Keep only the top 5 highscores
+    // Behalte nur die besten 5 Highscores
     if (highscores.length > 5) {
       highscores.pop();
     }
 
     localStorage.setItem("highscores", JSON.stringify(highscores));
-    displayHighscores(highscores);
-  }
-
-  function displayHighscores(highscores) {
-    highscoreList.innerHTML = "Highscore List:";
-    for (let i = 0; i < highscores.length; i++) {
-      const listItem = document.createElement("div");
-      listItem.textContent = `${i + 1}. ${highscores[i]} seconds`;
-      highscoreList.appendChild(listItem);
-    }
   }
 
   startStopwatch();
@@ -86,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function flipCard() {
     if (isFlipping) {
-      return; // Verhindert das Umklappen weiterer Karten, während bereits zwei Karten aufgedeckt sind
+      return;
     }
 
     const selectedCard = this;
@@ -101,6 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  progressBar.style.width = `${progressPercentage}%`;
+
   function checkMatch() {
     const [firstCard, secondCard] = flippedCards;
     const [firstIndex, secondIndex] = flippedIndexes;
@@ -112,16 +120,15 @@ document.addEventListener("DOMContentLoaded", () => {
       disableCards();
       matches++;
 
-      // Update progress bar
-      const progressPercentage = (matches / (cards.length / 2)) * 100;
+      progressPercentage = (matches / (cards.length / 2)) * 100;
       progressBar.style.width = `${progressPercentage}%`;
+      progressBar.textContent = `${progressPercentage}%`;
 
       if (matches === cards.length / 2) {
-        // All matches found
         endGame();
       }
     } else {
-      setTimeout(resetCards, 1000); // Delay resetCards for better user experience
+      setTimeout(resetCards, 1000);
     }
   }
 
@@ -140,12 +147,21 @@ document.addEventListener("DOMContentLoaded", () => {
     flippedIndexes = [];
     isFlipping = false;
   }
-
-  // Load and display highscores
-  const storedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
-  displayHighscores(storedHighscores);
 });
 
 function startNewGame() {
   location.reload();
+}
+
+function showHighscores() {
+  const storedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+  if (storedHighscores.length === 0) {
+    alert("No highscores available!");
+  } else {
+    const highscoreMessage = storedHighscores
+      .map((time, index) => `${index + 1}. ${time} seconds`)
+      .join("\n");
+    alert(`Highscores:\n${highscoreMessage}`);
+  }
 }

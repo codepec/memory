@@ -7,13 +7,24 @@
     <title>Memory Game</title>
 </head>
 <body>
-    <div id="memory-board"></div>
+    <div class="menu-bar">
+        <div class="menu-option" onclick="startNewGame()">New Game</div>
+        <div class="menu-option" onclick="showHighscores()">Highscores</div>
+        <!-- Weitere Menüoptionen hier hinzufügen, falls benötigt -->
+    </div>
+    <h1 class="animated fadeIn" >Memory</h1>
+    <p>by codepec</p>
     <div id="progress-container">
         <div id="progress-bar"></div>
     </div>
-    <div id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
+    <div >
+    <div id="memory-board"></div>
+    </div>
+
+    <div class="animated fadeIn" id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
     <button id="new-game-btn" onclick="startNewGame()">New Game</button>
-    <div id="highscore-list">Highscore List:</div>
+
+    <div id="highscore-list"></div>
     <script src="script.js"></script>
 </body>
 </html>

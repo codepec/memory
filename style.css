@@ -1,12 +1,76 @@
+
+
+
+
+:root {
+    --white: #ffffff;
+    --background: #48557e; /* Gold */
+
+    --card-bg: #cf37ca; /* DeepPink */
+    --card-hover-bg: #cf37ca; /* DeepPink */
+    --card-shadow: rgba(49, 4, 28, 0.8); /* DeepPink with alpha */
+
+    --progress-bg: #60dc60; /* LimeGreen */
+    --progress-shadow: #163516; /* LimeGreen */
+
+    --stopwatch-text: #67b3ff; /* DodgerBlue */
+    --stopwatch-shadow: rgba(11, 49, 86, 0.8); /* DodgerBlue with alpha */
+
+    --button-bg: #ff6347; /* Tomato */
+    --button-text: var(--white);
+
+    --highscore-text: var(--white);
+}
+
+
+
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
-    font-family: 'Arial', sans-serif;
+    background-color: var(--background);
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #333; /* Hintergrundfarbe der Menüleiste */
+    padding: 10px;
+    width: 90%;
+    margin:5px;
+}
+
+.menu-option {
+    margin:10px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Animation für Farbwechsel bei Hover */
+}
+
+.menu-option:hover {
+    color: #ff6347; /* Farbe bei Hover */
+}
+
+h1 {
+    font-family: 'Courier New', monospace;
+    color: var(--card-bg);
+    font-size: 50px;
+    margin: 10px;
+    text-shadow: 0 0 10px var(--card-shadow);
+}
+
+p {
+    font-family: 'Courier New', monospace;
+    color: var(--card-bg);
+    margin: 10px;
+    line-height: 1.2; /* Geringer Zeilenabstand für eine spielerische Optik */
+    text-shadow: 0 0 10px var(--card-shadow);
 }
 
 #memory-board {
@@ -20,10 +84,16 @@ body {
 .card {
     width: 100%;
     padding-bottom: 100%;
-    background-color: #3498db;
+    background-color: var(--card-bg);
     cursor: pointer;
     background-size: cover;
     background-position: center;
+    box-shadow: 0 0 10px var(--card-shadow);
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--card-shadow);
 }
 
 #progress-container {
@@ -36,25 +106,68 @@ body {
 
 #progress-bar {
     height: 100%;
-    background-color: #4caf50;
+    background-color: var(--progress-bg);
     transition: width 0.5s ease;
+    box-shadow: 0 0 20px var(--progress-shadow);
 }
 
 #stopwatch {
     font-size: 18px;
+    color: var(--stopwatch-text);
+    text-shadow: 2px 2px 4px var(--stopwatch-shadow);
 }
 
 #new-game-btn {
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    font-size: 16px;
+    padding: 15px 30px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    font-size: 20px;
     cursor: pointer;
     display: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    animation: pulse 1s infinite;
 }
 
 #highscore-list {
     margin-top: 20px;
     font-size: 16px;
     text-align: left;
+    color: var(--highscore-text);
+}
+
+.animated {
+    animation-duration: 1s;
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    transition: transform 0.3s ease-in-out;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    to {
+        transform: scale(0.95);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }
