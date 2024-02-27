@@ -33,7 +33,7 @@ body {
     margin: 0;
     background-color: var(--background);
     font-family: 'Courier New', monospace;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .menu-bar {
