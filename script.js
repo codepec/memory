@@ -165,3 +165,9 @@ function showHighscores() {
     alert(`Highscores:\n${highscoreMessage}`);
   }
 }
+
+function showLevels() {
+  alert("doesn't work yet")
+  
+  
+}
