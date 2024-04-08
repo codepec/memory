@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" defer src="script.js" ></script>
     <title>Memory Game</title>
 </head>
 <body>
@@ -14,20 +15,88 @@
        
         <!-- Weitere Menüoptionen hier hinzufügen, falls benötigt -->
     </div>
-    <h1 class="animated fadeIn" >Memory</h1>
-    <p>by codepec</p>
-    <div id="progress-container">
-        <div id="progress-bar"></div>
-    </div>
-    <div >
-    <div id="memory-board"></div>
-    </div>
 
-    <div class="animated fadeIn" id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
-    <button id="new-game-btn" onclick="startNewGame()">New Game</button>
+    <header id="header-container">
+        <h1>Willkommen bei Memory Abenteuer!</h1>
+        <p>Teste dein Gedächtnis und begib dich auf eine Reise durch verschiedene Welten!</p>
+    </header>
 
-    <div id="highscore-list"></div>
-    <div id="level-list"></div>
-    <script src="script.js"></script>
+
+    <div id="level-container">
+        <h2>Choose a Level:</h2>
+        <button class="level-button level-1" onclick="selectLevel(1)">
+            <span>Level 1: Jungle</span>
+            <div class="level-info">
+                <p class="level-label">Willkommen im Dschungel, wo Blätter flüstern und Schatten tanzen, wo das Rauschen der Bäume Geschichten erzählt und die Luft von Abenteuer erfüllt ist. Hier beginnt das wilde Herz des Lebens.</p>
+                <b><p class="level-label-highscore">Highscore: 123456</p></b>
+            </div>
+            <br/>
+            <span>Betrete den Dschungel</span>
+        </button>
+        
+        <button class="level-button level-2" onclick="selectLevel(2)">
+            <span>Level 2: Fantasy</span>
+            <div class="level-info">
+                <p class="level-label">Willkommen in der Welt der Fantasie, wo Magie in der Luft liegt und Drachen durch die Wolken gleiten. Bereite dich auf ein unvergessliches Abenteuer in einer Welt voller Wunder vor.</p>
+                <b><p class="level-label-highscore">Highscore: 789012</p></b>
+            </div>
+            <br/>
+            <span>Betrete das Fantasyuniversum</span>
+        </button>
+        
+        <button class="level-button level-3" onclick="selectLevel(3)">
+            <span>Level 3: Space</span>
+            <div class="level-info">
+                <p class="level-label">Willkommen im unendlichen Universum, wo Sterne deine Reise beleuchten und ferne Planeten darauf warten, erforscht zu werden. Tauche ein in die Weiten des Weltraums.</p>
+                <b><p class="level-label-highscore">Highscore: 345678</p></b>
+            </div>
+            <br/>
+            <span>Betrete den Cosmos</span>
+        </button>
+        
+        <button class="level-button level-4" onclick="selectLevel(4)">
+            <span>Level 4: Underwater</span>
+            <div class="level-info">
+                <p class="level-label">Willkommen in der Unterwasserwelt, wo Korallenriffe erblühen und bunte Fische durch die Ozeane gleiten. Tauche ein in eine Welt voller Geheimnisse und Schönheit.</p>
+                <b><p class="level-label-highscore">Highscore: 901234</p></b>
+            </div>
+            <br/>
+            <span>Betrete die Unterwasserwelt</span>
+        </button>
+        
+        <button class="level-button level-5" onclick="selectLevel(5)">
+            <span>Level 5: Desert</span>
+            <div class="level-info">
+                <p class="level-label">Willkommen in der endlosen Wüste, wo der Sand unter deinen Füßen glüht und das Sonnenlicht die Landschaft verzaubert. Bereite dich auf eine Reise durch eine Welt der Hitze und des Überlebens vor.</p>
+                <b><p class="level-label-highscore">Highscore: 567890</p></b>
+            </div>
+            <br/>
+            <span>Betrete die Wüste</span>
+        </button>
+    </div>
+    
+        <div id="game-container" style="display: none;">
+
+                <h1 class="center" id="choosenLevel"></h1>
+                <div class="animated fadeIn center" id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
+                <div id="progress-container">
+                    <div id="progress-bar"></div>
+                </div>
+                <div >
+                <div id="memory-board"></div>
+                </div>
+
+                
+                <button id="new-game-btn" onclick="startNewGame()">New Game</button>
+
+                <div id="highscore-list"></div>
+                <div id="level-list"></div>
+                <p class="center">by codepec</p>
+        </div>
+
+        
+        
+
+
 </body>
 </html>

@@ -60,9 +60,9 @@ body {
 h1 {
     font-family: 'Courier New', monospace;
     color: var(--card-bg);
-    font-size: 50px;
     margin: 10px;
     text-shadow: 0 0 10px var(--card-shadow);
+    text-align: center;
 }
 
 p {
@@ -170,4 +170,132 @@ p {
     50% {
         transform: scale(1.1);
     }
+}
+
+
+
+
+/* Allgemeine Stildefinitionen */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#level-container {
+    max-width: 600px;
+    margin: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.795);
+
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.level-button {
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+
+.level-button span {
+    /* Stile für die Level-Beschriftung */
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.level-info {
+    /* Stile für das Container-Element der zusätzlichen Informationen */
+
+
+    top: 100%;
+    left: 0;
+
+    background-color: rgba(255, 255, 255, 0.199); /* Hintergrundfarbe mit Transparenz */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    
+}
+
+.level-button:hover .level-info {
+    display: block; /* Beim Schweben über den Button anzeigen */
+}
+
+.level-label {
+    /* Stile für die zusätzlichen Informationen */
+    margin: 5px 0;
+    font-size: 14px;
+    color:white;
+    font-family: Arial, sans-serif;
+}
+
+.level-label-highscore {
+    /* Stile für die zusätzlichen Informationen */
+    margin: 5px 0;
+    font-size: 14px;
+    color:white;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Einzigartige Farbdefinitionen für jeden Level-Button */
+.level-button.level-1 {
+    background: linear-gradient(to bottom right, #4CAF50, #1a462d);
+}
+
+.level-button.level-2 {
+    background: linear-gradient(to bottom right, #db79ff, #4800a6);
+}
+
+.level-button.level-3 {
+    background: linear-gradient(to bottom right, #4682B4, #001554);
+}
+
+.level-button.level-4 {
+    background: linear-gradient(to bottom right, #20B2AA, #00fbff);
+}
+
+.level-button.level-5 {
+    background: linear-gradient(to bottom right, #FFA07A, #ffbf47);
+}
+
+.level-button:hover {
+    opacity: 0.9;
+}
+
+/* Anpassungen für Mobile */
+@media (max-width: 1600px) {
+    #level-container {
+        padding: 10px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    .level-button {
+        font-size: 16px;
+        padding: 8px;
+    }
+}
+
+#level-container{
+    display:none;
+}
+
+.center{
+    text-align: center;
 }
