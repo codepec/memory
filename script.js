@@ -131,22 +131,22 @@ function resetCards() {
 // Function to initialize cards array based on the selected level
 function initializeCards() {
   cards = [
-    `../img/${currentLevel}/1.jpg`,
-    `../img/${currentLevel}/2.jpg`,
-    `../img/${currentLevel}/3.jpg`,
-    `../img/${currentLevel}/4.jpg`,
-    `../img/${currentLevel}/5.jpg`,
-    `../img/${currentLevel}/6.jpg`,
-    `../img/${currentLevel}/7.jpg`,
-    `../img/${currentLevel}/8.jpg`,
-    `../img/${currentLevel}/1.jpg`,
-    `../img/${currentLevel}/2.jpg`,
-    `../img/${currentLevel}/3.jpg`,
-    `../img/${currentLevel}/4.jpg`,
-    `../img/${currentLevel}/5.jpg`,
-    `../img/${currentLevel}/6.jpg`,
-    `../img/${currentLevel}/7.jpg`,
-    `../img/${currentLevel}/8.jpg`,
+    `img/${currentLevel}/1.jpg`,
+    `img/${currentLevel}/2.jpg`,
+    `img/${currentLevel}/3.jpg`,
+    `img/${currentLevel}/4.jpg`,
+    `img/${currentLevel}/5.jpg`,
+    `img/${currentLevel}/6.jpg`,
+    `img/${currentLevel}/7.jpg`,
+    `img/${currentLevel}/8.jpg`,
+    `img/${currentLevel}/1.jpg`,
+    `img/${currentLevel}/2.jpg`,
+    `img/${currentLevel}/3.jpg`,
+    `img/${currentLevel}/4.jpg`,
+    `img/${currentLevel}/5.jpg`,
+    `img/${currentLevel}/6.jpg`,
+    `img/${currentLevel}/7.jpg`,
+    `img/${currentLevel}/8.jpg`,
     // Add other jungle images here
   ];
 
