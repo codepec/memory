@@ -4,7 +4,7 @@
 
 :root {
     --white: #ffffff;
-    --background: #48557e; /* Gold */
+    --background: #141d2b ; /* Gold */
 
     --card-bg: #cf37ca; /* DeepPink */
     --card-hover-bg: #cf37ca; /* DeepPink */
@@ -39,10 +39,11 @@ body {
 .menu-bar {
     display: flex;
     justify-content: space-around;
-    background-color: #333; /* Hintergrundfarbe der Menüleiste */
+    background-color: #212529; /* Hintergrundfarbe der Menüleiste */
     padding: 10px;
     width: 90%;
     margin:5px;
+    border-radius: 15px;
 }
 
 .menu-option {
@@ -186,10 +187,6 @@ body {
     max-width: 600px;
     margin: 40px;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.795);
-
 }
 
 h2 {
@@ -201,12 +198,13 @@ h2 {
     text-align: left;
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
 }
 
 
@@ -255,11 +253,11 @@ h2 {
 
 /* Einzigartige Farbdefinitionen für jeden Level-Button */
 .level-button.level-1 {
-    background: linear-gradient(to bottom right, #4CAF50, #1a462d);
+    background: linear-gradient(to bottom right, #339d37, #1a462d);
 }
 
 .level-button.level-2 {
-    background: linear-gradient(to bottom right, #db79ff, #4800a6);
+    background: linear-gradient(to bottom right, #8933a8, #4800a6);
 }
 
 .level-button.level-3 {
@@ -267,11 +265,11 @@ h2 {
 }
 
 .level-button.level-4 {
-    background: linear-gradient(to bottom right, #20B2AA, #00fbff);
+    background: linear-gradient(to bottom right, #1c8782, #0b4344);
 }
 
 .level-button.level-5 {
-    background: linear-gradient(to bottom right, #FFA07A, #ffbf47);
+    background: linear-gradient(to bottom right, #d7815f, #d59319);
 }
 
 .level-button:hover {
@@ -280,6 +278,12 @@ h2 {
 
 /* Anpassungen für Mobile */
 @media (max-width: 1600px) {
+    #level-container{
+        width: 90%;
+      
+    }
+
+
     #level-container {
         padding: 10px;
     }
@@ -293,7 +297,7 @@ h2 {
 }
 
 #level-container{
-    display:none;
+    display:block;
 }
 
 .center{

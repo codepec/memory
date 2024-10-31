@@ -224,19 +224,20 @@ function selectLevel(level) {
 
 function startNewGame() {
   location.reload();
+
 }
 
 // Function to show the level selection menu
 function showLevels() {
   levelContainer.style.display = "block";
   gameContainer.style.display = "none";
-  headerContainer.style.display = "none";
+
 }
 
 function showGameTable() {
   gameContainer.style.display = "block";
   levelContainer.style.display = "none";
-  headerContainer.style.display = "none";
+
 }
 
 function showHighscores() {

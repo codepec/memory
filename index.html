@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
     <script type="text/javascript" defer src="script.js" ></script>
+    <script type="text/javascript" defer src="main.js" ></script>
     <title>Memory Game</title>
 </head>
 <body>
@@ -16,14 +18,8 @@
         <!-- Weitere Menüoptionen hier hinzufügen, falls benötigt -->
     </div>
 
-    <header id="header-container">
-        <h1>Willkommen bei Memory Abenteuer!</h1>
-        <p>Teste dein Gedächtnis und begib dich auf eine Reise durch verschiedene Welten!</p>
-    </header>
-
 
     <div id="level-container">
-        <h2>Choose a Level:</h2>
         <button class="level-button level-1" onclick="selectLevel(1)">
             <span>Level 1: Jungle</span>
             <div class="level-info">
