@@ -6,21 +6,72 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" defer src="script.js"></script>
+    <script type="text/javascript" defer src="modalScript.js"></script>
+    <script type="text/javascript" defer src="settings.js"></script>
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="settings.css">
+    
     <title>Memory Game</title>
 </head>
 <body>
     <div class="menu-bar">
         <div class="menu-option" onclick="startNewGame()">New Game</div>
         <div class="menu-option" onclick="showHighscores()">Highscores</div>
-        <div class="menu-option" onclick="showLevels()">Levels</div>
+        <div class="menu-option" onclick="showSettings()">Settings</div>
     </div>
+
+    <div id="modal">
+        <div id="modal-content"></div>
+    </div>
+
+    <div id="settings-container" style="display: none;">
+        <h2>Game Settings</h2>
+        
+        <!-- Difficulty Level Settings -->
+        <div class="setting-option">
+            <label for="difficulty">Difficulty Level:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+    
+        <!-- Sound Settings -->
+        <div class="setting-option">
+            <label for="sound">Sound:</label>
+            <input type="checkbox" id="sound" name="sound" checked>
+            <span>Enable/Disable Sound</span>
+        </div>
+    
+        <!-- Timer Settings -->
+        <div class="setting-option">
+            <label for="timer">Timer:</label>
+            <input type="checkbox" id="timer" name="timer" checked>
+            <span>Enable/Disable Timer</span>
+        </div>
+    
+        <!-- Background Music Settings -->
+        <div class="setting-option">
+            <label for="bg-music">Background Music:</label>
+            <input type="checkbox" id="bg-music" name="bg-music" checked>
+            <span>Enable/Disable Background Music</span>
+        </div>
+    
+        <!-- Save and Close Button -->
+        <div class="setting-option">
+            <button id="save-settings-btn" onclick="saveSettings()">Save Settings</button>
+        </div>
+    </div>
+    
+    
 
     <div id="level-container">
         <!-- Level 1 -->
         <button class="level-button level-1" onclick="selectLevel(1)">
             <div class="level-stats">
                 <p class="level-label">Level 1: Jungle</p>
-                <p class="level-label-highscore">Highscore: 123456</p>
+                <p class="level-label-highscore" id="level-highscore-1">Highscore: 123456</p>
             </div>
             <img src="img/1/1.jpg" alt="Jungle" class="level-portrait">
             <div class="level-info">
@@ -33,7 +84,7 @@
         <button class="level-button level-2" onclick="selectLevel(2)">
             <div class="level-stats">
                 <p class="level-label">Level 2: Fantasy</p>
-                <p class="level-label-highscore">Highscore: 789012</p>
+                <p class="level-label-highscore" id="level-highscore-2">Highscore: 789012</p>
             </div>
             <img src="img/2/1.jpg" alt="Fantasy" class="level-portrait">
             <div class="level-info">
@@ -46,7 +97,7 @@
         <button class="level-button level-3" onclick="selectLevel(3)">
             <div class="level-stats">
                 <p class="level-label">Level 3: Space</p>
-                <p class="level-label-highscore">Highscore: 345678</p>
+                <p class="level-label-highscore" id="level-highscore-3">Highscore: 345678</p>
             </div>
             <img src="img/3/1.jpg" alt="Space" class="level-portrait">
             <div class="level-info">
@@ -59,7 +110,7 @@
         <button class="level-button level-4" onclick="selectLevel(4)">
             <div class="level-stats">
                 <p class="level-label">Level 4: Underwater</p>
-                <p class="level-label-highscore">Highscore: 901234</p>
+                <p class="level-label-highscore" id="level-highscore-4">Highscore: 901234</p>
             </div>
             <img src="img/4/1.jpg" alt="Underwater" class="level-portrait">
             <div class="level-info">
@@ -72,7 +123,7 @@
         <button class="level-button level-5" onclick="selectLevel(5)">
             <div class="level-stats">
                 <p class="level-label">Level 5: Desert</p>
-                <p class="level-label-highscore">Highscore: 567890</p>
+                <p class="level-label-highscore" id="level-highscore-5">Highscore: 567890</p>
             </div>
             <img src="img/5/1.jpg" alt="Desert" class="level-portrait">
             <div class="level-info">

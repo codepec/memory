@@ -1,0 +1,100 @@
+/* settings.css */
+
+/* General Settings Container */
+#settings-container {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Hidden by default, will be shown with JS */
+}
+
+/* Title */
+#settings-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Setting Option Container */
+.setting-option {
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+.setting-option label {
+    font-size: 16px;
+    color: #444;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Select dropdown for difficulty */
+.setting-option select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Checkbox styling */
+.setting-option input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2); /* Enlarge the checkbox */
+}
+
+/* Span text next to checkbox */
+.setting-option span {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Button Styling */
+#save-settings-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#save-settings-btn:hover {
+    background-color: #45a049;
+}
+
+/* Center button horizontally */
+#save-settings-btn {
+    text-align: center;
+    display: inline-block;
+}
+
+/* Option for closing the settings container */
+#close-settings-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+#close-settings-btn:hover {
+    background-color: #e53935;
+}

@@ -1,0 +1,58 @@
+/* Modal Container */
+#modal {
+    display: none; /* Modal ist initial verborgen */
+    position: fixed;
+    z-index: 1000; /* Sicherstellen, dass das Modal über anderen Elementen liegt */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Falls der Inhalt länger ist, als der Bildschirm */
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+}
+
+/* Modal Inhalt */
+#modal-content {
+    background-color: #ffffff; /* Hintergrundfarbe */
+    margin: 15% auto; /* Zentriert das Modal vertikal und horizontal */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px; /* Abgerundete Ecken */
+    width: 70%; /* Breite des Modals */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leichter Schatten */
+    animation: fadeIn 0.3s ease-in-out; /* Weiche Einblendung */
+    color:#000;
+}
+
+ul {
+    list-style-type: decimal; /* Ändert die Aufzählungszeichen in Zahlen */
+}
+
+ul li {
+    margin-bottom: 8px; /* Abstand zwischen den Listenelementen */
+}
+
+/* Schließen-Button */
+#close-modal {
+    color: #aaa; /* Graue Schriftfarbe */
+    float: right; /* Rechts ausgerichtet */
+    font-size: 28px; /* Größe */
+    font-weight: bold; /* Fett */
+    cursor: pointer; /* Zeigt die Hand an */
+}
+
+#close-modal:hover,
+#close-modal:focus {
+    color: #000; /* Dunklere Schriftfarbe bei Hover */
+    text-decoration: none; /* Entfernt Unterstreichung */
+}
+
+/* Animation für sanftes Einblenden */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

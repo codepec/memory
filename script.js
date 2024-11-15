@@ -16,12 +16,15 @@ const timeElement = document.getElementById("time-value");
 const newGameBtn = document.getElementById("new-game-btn");
 const highscoreList = document.getElementById("highscore-list");
 const levelContainer = document.getElementById("level-container");
+const settingsContainer = document.getElementById("settings-container");
 const gameContainer = document.getElementById("game-container");
 const headerContainer = document.getElementById("header-container");
 
+let stopwatchInterval;
+
 function startStopwatch() {
   startTime = Date.now();
-  setInterval(updateStopwatch, 1000);
+  stopwatchInterval = setInterval(updateStopwatch, 1000);
 }
 
 function updateStopwatch() {
@@ -31,6 +34,7 @@ function updateStopwatch() {
 }
 
 function endGame() {
+  clearInterval(stopwatchInterval);
   const elapsedTime = parseInt(timeElement.textContent);
   const highscores = JSON.parse(localStorage.getItem("highscores")) || [];
   const placement = getPlacement(highscores, elapsedTime);
@@ -47,28 +51,36 @@ function endGame() {
 function getPlacement(highscores, currentTime) {
   const sortedHighscores = [...highscores, currentTime].sort((a, b) => a - b);
   const placement = sortedHighscores.indexOf(currentTime) + 1;
-
   return placement;
 }
 
 function addToHighscore(time) {
-  const highscores = JSON.parse(localStorage.getItem("highscores")) || [];
-  const score = { time: time, level: level, score: generateScore(time) };
+  const levelKey = `highscores_level_${currentLevel}`;  // Key for each level
+  const highscores = JSON.parse(localStorage.getItem(levelKey)) || [];
+  
+  // Create a score object with the level and time
+  const score = { time: time, score: generateScore(time) };
+  
+  // Add the new score to the highscores array
   highscores.push(score);
-  highscores.sort((a, b) => b.score - a.score); // Sortiere nach absteigendem Highscore
-
-  // Behalte nur die besten 5 Highscores
+  
+  // Sort the scores by highest score
+  highscores.sort((a, b) => b.score - a.score);
+  
+  // Keep only the top 5 scores
   if (highscores.length > 5) {
     highscores.pop();
   }
-
-  localStorage.setItem("highscores", JSON.stringify(highscores));
+  
+  // Save the updated highscores array for the current level
+  localStorage.setItem(levelKey, JSON.stringify(highscores));
 }
+
 
 function generateScore(time) {
   // Beispiel für eine einfache Formel zur Erzeugung des Highscore-Werts
   // Du kannst dies anpassen, um die Wertung nach deinen eigenen Kriterien zu berechnen
-  return (1 / time) * 1000 * 23;
+  return (1 / time) * 100000 * Math.PI * Math.PI;
 }
 
 function flipCard() {
@@ -180,33 +192,6 @@ function startMemoryGame() {
   progressPercentage = 0;
 }
 
-function displayHighscores() {
-  const highscores = JSON.parse(localStorage.getItem("highscores")) || [];
-  const bestScores = {};
-
-  // Gruppiere Highscores nach Level und finde den besten Highscore für jedes Level
-  highscores.forEach((score) => {
-    const level = score.level;
-    if (!bestScores[level] || score.score > bestScores[level]) {
-      bestScores[level] = score.score;
-    }
-  });
-
-  // Aktualisiere die Highscore-Anzeige für jedes Level im HTML
-  for (let level = 1; level <= 5; level++) {
-    const bestScore = bestScores[level];
-    const highscoreElement = document.querySelector(
-      `.level-${level} .level-label-highscore`
-    );
-
-    if (bestScore) {
-      highscoreElement.innerText = `<b>Highscore: ${bestScore.toFixed(2)}</b>`;
-    } else {
-      highscoreElement.innerText = "No highscore yet";
-    }
-  }
-}
-
 // Update the chosenLevel element
 const choosenLevelElement = document.getElementById("choosenLevel");
 // Event listener for level selection
@@ -233,32 +218,54 @@ function startNewGame() {
 function showLevels() {
   levelContainer.style.display = "block";
   gameContainer.style.display = "none";
+  settingsContainer.style.display = "none";
+}
+
+function showSettings() {
+  levelContainer.style.display = "none";
+  gameContainer.style.display = "none";
+  settingsContainer.style.display = "block";
 
 }
 
 function showGameTable() {
   gameContainer.style.display = "block";
   levelContainer.style.display = "none";
+  settingsContainer.style.display = "none";
 
 }
 
 function showHighscores() {
-  const storedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
-
-  if (storedHighscores.length === 0) {
-    alert("No highscores available!");
-  } else {
-    const highscoreMessage = storedHighscores
-      .map((score, index) => `${index + 1}. ${formatHighscore(score)}`)
-      .join("\n");
-    alert(`Highscores:\n${highscoreMessage}`);
+  // Initialisiere das Highscore-Inhaltsformat
+  let content = '<h2>Highscores</h2>';
+  
+  // Iteriere durch alle Levels und füge Highscores hinzu
+  for (let level = 1; level <= 5; level++) {
+    const levelKey = `highscores_level_${level}`;
+    const highscores = JSON.parse(localStorage.getItem(levelKey)) || [];
+    
+    content += `<h3>Level ${level}</h3>`;
+    
+    if (highscores.length === 0) {
+      content += '<p>No highscores available!</p>';
+    } else {
+      content += '<ul>';
+      highscores.forEach((score) => {
+        content += `<li> ${score.score.toFixed(0)} (${score.time} seconds)</li>`;
+      });
+      content += '</ul>';
+    }
   }
+  
+  // Zeige die Inhalte im Modal an
+  openModal(content);
 }
+
 
 function formatHighscore(score) {
   // Formatierung des Highscores nach deinen Anforderungen
   // Hier verwende ich eine einfache Formatierung, die die Zeit anzeigt
-  return `${score.score.toFixed(2)} (${score.time} seconds)`;
+  return `${score.score.toFixed(0)} (${score.time} seconds)`;
 }
 
 function updateLevel(level) {
@@ -320,3 +327,27 @@ function updateLevel(level) {
       break;
   }
 }
+
+
+function updateHighscoreDisplay() {
+  for (let level = 1; level <= 5; level++) {
+    const levelKey = `highscores_level_${level}`;
+    const highscores = JSON.parse(localStorage.getItem(levelKey)) || [];
+    
+    // Bestimmen des besten Scores (höchster Wert)
+    let bestScore = "No highscore yet"; // Standardwert, falls keine Highscores existieren
+    if (highscores.length > 0) {
+      bestScore = `${highscores[0].score.toFixed(0)}`;
+    }
+
+    // Aktualisieren des HTML-Elements
+    const highscoreElement = document.getElementById(`level-highscore-${level}`);
+    if (highscoreElement) {
+      highscoreElement.innerHTML = `Highscore: <b>${bestScore}</b>`;
+    }
+  }
+}
+
+// Beispiel: Highscore für alle Levels laden
+updateHighscoreDisplay();
+
