@@ -11,6 +11,7 @@ let isFlipping = false;
 let progressPercentage = 0; // Setze den Fortschritt zu Beginn auf 0
 
 const progressBar = document.getElementById("progress-bar");
+const progressBarText = document.getElementById("progress-text");
 const timeElement = document.getElementById("time-value");
 const newGameBtn = document.getElementById("new-game-btn");
 const highscoreList = document.getElementById("highscore-list");
@@ -101,8 +102,9 @@ function checkMatch() {
     matches++;
 
     progressPercentage = (matches / (cards.length / 2)) * 100;
-    progressBar.style.width = `${progressPercentage}%`;
-    progressBar.textContent = `${progressPercentage}%`;
+    progressBar.style.width = `${progressPercentage}%`; // Fortschrittsbalken-Breite
+    progressBarText.textContent = `${progressPercentage}%`; // Textinhalt mit Abstand
+    
 
     if (matches === cards.length / 2) {
       endGame();
@@ -218,7 +220,7 @@ function selectLevel(level) {
   progressPercentage = 0;
   progressPercentage = (matches / (cards.length / 2)) * 100;
   progressBar.style.width = `${progressPercentage}%`;
-  progressBar.textContent = `${progressPercentage}%`;
+  progressBarText.textContent = `${progressPercentage}%`;
   choosenLevelElement.textContent = `Level ${currentLevel}`;
 }
 
@@ -260,36 +262,59 @@ function formatHighscore(score) {
 }
 
 function updateLevel(level) {
-  const root = document.documentElement; // Wurzel-Element des Dokuments (html)
+  const root = document.documentElement;
 
   switch (level) {
     case 1:
-      root.style.setProperty("--card-bg", "#4CAF50");
-      root.style.setProperty("--card-hover-bg", "#1a462d");
-      root.style.setProperty("--card-shadow", "#1a462d");
+      root.style.setProperty("--card-bg", "#11b816");         // Helle Grundfarbe für Level 1
+      root.style.setProperty("--card-hover-bg", "#0f8014");   // Etwas dunklere Farbe für Hover-Effekt
+      root.style.setProperty("--card-shadow", "#000000");     // Dunkle Farbe für Schatten
+      root.style.setProperty(
+        "--level-background",
+        "linear-gradient(to bottom right, #11b816, #000000)"
+      );
       break;
+      
     case 2:
-      root.style.setProperty("--card-bg", "#db79ff");
-      root.style.setProperty("--card-hover-bg", "#db79ff");
-      root.style.setProperty("--card-shadow", "#4800a6");
+      root.style.setProperty("--card-bg", "#6309ff");         // Helle Grundfarbe für Level 2
+      root.style.setProperty("--card-hover-bg", "#5008cc");   // Etwas dunklere Farbe für Hover-Effekt
+      root.style.setProperty("--card-shadow", "#330055");     // Dunklere Farbe für Schatten
+      root.style.setProperty(
+        "--level-background",
+        "linear-gradient(to bottom right, #6309ff, #7a1662)"
+      );
       break;
+      
     case 3:
-      root.style.setProperty("--card-bg", "#4682B4");
-      root.style.setProperty("--card-hover-bg", "#4682B4");
-      root.style.setProperty("--card-shadow", "#001554");
+      root.style.setProperty("--card-bg", "#1565c0");         // Helle Grundfarbe für Level 3
+      root.style.setProperty("--card-hover-bg", "#104a8a");   // Etwas dunklere Farbe für Hover-Effekt
+      root.style.setProperty("--card-shadow", "#001554");     // Dunkle Farbe für Schatten
+      root.style.setProperty(
+        "--level-background",
+        "linear-gradient(to bottom right, #181e23, #1565c0)"
+      );
       break;
-
+      
     case 4:
-      root.style.setProperty("--card-bg", "#20B2AA");
-      root.style.setProperty("--card-hover-bg", "#20B2AA");
-      root.style.setProperty("--card-shadow", "#001554");
+      root.style.setProperty("--card-bg", "#20B2AA");         // Helle Grundfarbe für Level 4
+      root.style.setProperty("--card-hover-bg", "#1a908a");   // Etwas dunklere Farbe für Hover-Effekt
+      root.style.setProperty("--card-shadow", "#041918");     // Dunkle Farbe für Schatten
+      root.style.setProperty(
+        "--level-background",
+        "linear-gradient(to bottom right, #20B2AA, #041918)"
+      );
       break;
-
+      
     case 5:
-      root.style.setProperty("--card-bg", "#FFA07A");
-      root.style.setProperty("--card-hover-bg", "#FFA07A");
-      root.style.setProperty("--card-shadow", "black");
+      root.style.setProperty("--card-bg", "#fbc02d");         // Helle Grundfarbe für Level 5
+      root.style.setProperty("--card-hover-bg", "#f1a022");   // Etwas dunklere Farbe für Hover-Effekt
+      root.style.setProperty("--card-shadow", "#000");     // Passende Farbe für Schatten
+      root.style.setProperty(
+        "--level-background",
+        "linear-gradient(to bottom right, #fbc02d, #FFA07A)"
+      );
       break;
+      
     default:
       // Standardfarben für unbekannte Level
       break;

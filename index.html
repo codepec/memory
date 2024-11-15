@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <script type="text/javascript" defer src="script.js" ></script>
-    <script type="text/javascript" defer src="main.js" ></script>
+    <script type="text/javascript" defer src="script.js"></script>
     <title>Memory Game</title>
 </head>
 <body>
@@ -14,85 +13,88 @@
         <div class="menu-option" onclick="startNewGame()">New Game</div>
         <div class="menu-option" onclick="showHighscores()">Highscores</div>
         <div class="menu-option" onclick="showLevels()">Levels</div>
-       
-        <!-- Weitere Menüoptionen hier hinzufügen, falls benötigt -->
     </div>
-
 
     <div id="level-container">
+        <!-- Level 1 -->
         <button class="level-button level-1" onclick="selectLevel(1)">
-            <span>Level 1: Jungle</span>
-            <div class="level-info">
-                <p class="level-label">Willkommen im Dschungel, wo Blätter flüstern und Schatten tanzen, wo das Rauschen der Bäume Geschichten erzählt und die Luft von Abenteuer erfüllt ist. Hier beginnt das wilde Herz des Lebens.</p>
-                <b><p class="level-label-highscore">Highscore: 123456</p></b>
+            <div class="level-stats">
+                <p class="level-label">Level 1: Jungle</p>
+                <p class="level-label-highscore">Highscore: 123456</p>
             </div>
-            <br/>
-            <span>Betrete den Dschungel</span>
+            <img src="img/1/1.jpg" alt="Jungle" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Willkommen im Dschungel, wo Blätter flüstern, Schatten tanzen und wilde Tiere sich verstecken.</p>
+            </div>
+            <span class="enter-level">Betrete den Dschungel</span>
         </button>
-        
+
+        <!-- Level 2 -->
         <button class="level-button level-2" onclick="selectLevel(2)">
-            <span>Level 2: Fantasy</span>
-            <div class="level-info">
-                <p class="level-label">Willkommen in der Welt der Fantasie, wo Magie in der Luft liegt und Drachen durch die Wolken gleiten. Bereite dich auf ein unvergessliches Abenteuer in einer Welt voller Wunder vor.</p>
-                <b><p class="level-label-highscore">Highscore: 789012</p></b>
+            <div class="level-stats">
+                <p class="level-label">Level 2: Fantasy</p>
+                <p class="level-label-highscore">Highscore: 789012</p>
             </div>
-            <br/>
-            <span>Betrete das Fantasyuniversum</span>
+            <img src="img/2/1.jpg" alt="Fantasy" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Willkommen in der Welt der Fantasie, wo Magie in der Luft liegt und Drachen durch die Wolken gleiten.</p>
+            </div>
+            <span class="enter-level">Betrete das Fantasyuniversum</span>
         </button>
-        
+
+        <!-- Level 3 -->
         <button class="level-button level-3" onclick="selectLevel(3)">
-            <span>Level 3: Space</span>
-            <div class="level-info">
-                <p class="level-label">Willkommen im unendlichen Universum, wo Sterne deine Reise beleuchten und ferne Planeten darauf warten, erforscht zu werden. Tauche ein in die Weiten des Weltraums.</p>
-                <b><p class="level-label-highscore">Highscore: 345678</p></b>
+            <div class="level-stats">
+                <p class="level-label">Level 3: Space</p>
+                <p class="level-label-highscore">Highscore: 345678</p>
             </div>
-            <br/>
-            <span>Betrete den Cosmos</span>
+            <img src="img/3/1.jpg" alt="Space" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Willkommen im unendlichen Universum, wo Sterne deine Reise beleuchten und Planeten warten.</p>
+            </div>
+            <span class="enter-level">Betrete den Cosmos</span>
         </button>
-        
+
+        <!-- Level 4 -->
         <button class="level-button level-4" onclick="selectLevel(4)">
-            <span>Level 4: Underwater</span>
-            <div class="level-info">
-                <p class="level-label">Willkommen in der Unterwasserwelt, wo Korallenriffe erblühen und bunte Fische durch die Ozeane gleiten. Tauche ein in eine Welt voller Geheimnisse und Schönheit.</p>
-                <b><p class="level-label-highscore">Highscore: 901234</p></b>
+            <div class="level-stats">
+                <p class="level-label">Level 4: Underwater</p>
+                <p class="level-label-highscore">Highscore: 901234</p>
             </div>
-            <br/>
-            <span>Betrete die Unterwasserwelt</span>
+            <img src="img/4/1.jpg" alt="Underwater" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Willkommen in der Unterwasserwelt, wo Korallenriffe erblühen und Fische durch die Ozeane gleiten.</p>
+            </div>
+            <span class="enter-level">Betrete die Unterwasserwelt</span>
         </button>
-        
+
+        <!-- Level 5 -->
         <button class="level-button level-5" onclick="selectLevel(5)">
-            <span>Level 5: Desert</span>
-            <div class="level-info">
-                <p class="level-label">Willkommen in der endlosen Wüste, wo der Sand unter deinen Füßen glüht und das Sonnenlicht die Landschaft verzaubert. Bereite dich auf eine Reise durch eine Welt der Hitze und des Überlebens vor.</p>
-                <b><p class="level-label-highscore">Highscore: 567890</p></b>
+            <div class="level-stats">
+                <p class="level-label">Level 5: Desert</p>
+                <p class="level-label-highscore">Highscore: 567890</p>
             </div>
-            <br/>
-            <span>Betrete die Wüste</span>
+            <img src="img/5/1.jpg" alt="Desert" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Willkommen in der endlosen Wüste, wo der Sand glüht und das Sonnenlicht die Landschaft verzaubert.</p>
+            </div>
+            <span class="enter-level">Betrete die Wüste</span>
         </button>
     </div>
-    
-        <div id="game-container" style="display: none;">
 
-                <h1 class="center" id="choosenLevel"></h1>
-                <div class="animated fadeIn center" id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
-                <div id="progress-container">
-                    <div id="progress-bar"></div>
-                </div>
-                <div >
-                <div id="memory-board"></div>
-                </div>
-
-                
-                <button id="new-game-btn" onclick="startNewGame()">New Game</button>
-
-                <div id="highscore-list"></div>
-                <div id="level-list"></div>
-                <p class="center">by codepec</p>
+    <div id="game-container" style="display: none;">
+        <h1 class="center" id="choosenLevel"></h1>
+        <div class="animated fadeIn center" id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
+        <div id="progress-container">
+            <div id="progress-bar">
+                <span id="progress-text"></span>
+            </div>
         </div>
-
-        
-        
-
-
+        <div id="memory-board"></div>
+        <button id="new-game-btn" onclick="startNewGame()">New Game</button>
+        <div id="highscore-list"></div>
+        <div id="level-list"></div>
+        <p class="center">by codepec</p>
+    </div>
 </body>
 </html>
