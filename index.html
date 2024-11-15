@@ -8,8 +8,10 @@
     <script type="text/javascript" defer src="script.js"></script>
     <script type="text/javascript" defer src="modalScript.js"></script>
     <script type="text/javascript" defer src="settings.js"></script>
+    <script type="text/javascript" defer src="achievement.js"></script>
     <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="achievement.css">
 
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
 
@@ -25,12 +27,33 @@
 <body>
     <div class="menu-bar">
         <div class="menu-option" onclick="startNewGame()">New Game</div>
-        <div class="menu-option" onclick="showHighscores()">Highscores</div>
+        <div class="menu-option" onclick="showHighscores()">Highscore</div>
+        <div class="menu-option" onclick="showAchievements()">Goals</div>
         <div class="menu-option" onclick="showSettings()">Settings</div>
     </div>
 
     <div id="modal">
         <div id="modal-content"></div>
+    </div>
+
+    <div id="achievement-popup" class="achievement-popup">
+        <div class="achievement-message">
+          <h3>Achievement unlocked!</h3>
+          <p id="achievement-text"></p>
+          <button onclick="closeAchievementPopup()">Close</button>
+        </div>
+      </div>
+
+    <div id="achievements-container" style="display: none;">
+      <div id="achievement-tracker">
+        <h4>Achievements</h4>
+        <ul>
+          <li id="firstWin-tracker">Erster Sieg: <span class="status">Nicht erreicht</span></li>
+          <li id="fastWin-tracker">Schnellster Sieg: <span class="status">Nicht erreicht</span></li>
+          <li id="perfectWin-tracker">Perfekter Sieg: <span class="status">Nicht erreicht</span></li>
+          <li id="levelUp-tracker">Level-up: <span class="status">Nicht erreicht</span></li>
+        </ul>
+      </div>
     </div>
 
     <div id="settings-container" style="display: none;">
@@ -71,6 +94,7 @@
         <div class="setting-option">
             <button id="save-settings-btn" onclick="saveSettings()">Save Settings</button>
         </div>
+
     </div>
     
     

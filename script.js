@@ -16,6 +16,8 @@ const timeElement = document.getElementById("time-value");
 const newGameBtn = document.getElementById("new-game-btn");
 const highscoreList = document.getElementById("highscore-list");
 const levelContainer = document.getElementById("level-container");
+const showAchievementsContainer = document.getElementById("achievements-container");
+
 const settingsContainer = document.getElementById("settings-container");
 const gameContainer = document.getElementById("game-container");
 const headerContainer = document.getElementById("header-container");
@@ -214,17 +216,27 @@ function startNewGame() {
 
 }
 
+function showAchievements(){
+  levelContainer.style.display = "none";
+  gameContainer.style.display = "none";
+  settingsContainer.style.display = "none";
+  showAchievementsContainer.style.display = "block";
+
+}
+
 // Function to show the level selection menu
 function showLevels() {
   levelContainer.style.display = "block";
   gameContainer.style.display = "none";
   settingsContainer.style.display = "none";
+  showAchievementsContainer.style.display = "none";
 }
 
 function showSettings() {
   levelContainer.style.display = "none";
   gameContainer.style.display = "none";
   settingsContainer.style.display = "block";
+  showAchievementsContainer.style.display = "none";
 
 }
 
@@ -232,6 +244,7 @@ function showGameTable() {
   gameContainer.style.display = "block";
   levelContainer.style.display = "none";
   settingsContainer.style.display = "none";
+  showAchievementsContainer.style.display = "none";
 
 }
 
@@ -351,3 +364,6 @@ function updateHighscoreDisplay() {
 // Beispiel: Highscore für alle Levels laden
 updateHighscoreDisplay();
 
+function displayHighscores(){
+  console.log(bestScore);
+}
