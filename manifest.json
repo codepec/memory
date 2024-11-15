@@ -5,7 +5,7 @@
     "lang": "de",
     "display": "fullscreen",
     "background_color": "#333",
-    "theme_color": "#4CAF50",
+    "theme_color": "#000",
   "orientation": "portrait-primary",
   "scope": "/",
   "start_url": "https://codepec.github.io/memory",
