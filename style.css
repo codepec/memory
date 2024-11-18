@@ -13,7 +13,7 @@
     --stopwatch-text: #67b3ff; /* DodgerBlue */
     --stopwatch-shadow: rgba(11, 49, 86, 0.8); /* DodgerBlue with alpha */
 
-    --navbar-bg: #081a50;
+    --navbar-bg: #2a2f5f;
 }
 
 body {
@@ -279,3 +279,7 @@ body {
         transform: scale(0.9); /* Return to original size */
     }
 }
+
+
+
+

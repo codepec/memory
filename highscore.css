@@ -1,0 +1,57 @@
+#highscore-container {
+    padding:25px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    color: black;
+}
+
+#highscore-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color:#fff;
+}
+
+#highscore-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.highscore-table {
+    width: 100%;
+    padding: 40px;
+    border-radius: 15px;
+    background-color: #fff;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.highscore-table th, .highscore-table td {
+    padding: 12px;
+    text-align: center;
+    border: none;
+}
+
+.highscore-table th {
+    background-color: none;
+    color: crimson;
+    border-bottom: 1px solid crimson;
+}
+
+.highscore-table tr:nth-child(even) {
+    background-color: none;
+}
+
+.highscore-table td {
+    font-size: 1rem;
+    color: black;
+    background-color: none;
+    border-radius: 10px;
+}
+
+#highscore-container p {
+
+    color: #fff;
+
+}

@@ -6,12 +6,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" defer src="script.js"></script>
-    <script type="text/javascript" defer src="modalScript.js"></script>
     <script type="text/javascript" defer src="settings.js"></script>
     <script type="text/javascript" defer src="achievement.js"></script>
-    <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="achievement.css">
+    <link rel="stylesheet" href="highscore.css">
 
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
 
@@ -27,14 +26,17 @@
 <body>
     <div class="menu-bar">
         <div class="menu-option" onclick="startNewGame()">New Game</div>
-        <div class="menu-option" onclick="showHighscores()">Highscore</div>
+        <div class="menu-option" onclick="showHighscores()">Highscores</div>
         <div class="menu-option" onclick="showAchievements()">Goals</div>
         <div class="menu-option" onclick="showSettings()">Settings</div>
     </div>
 
-    <div id="modal">
-        <div id="modal-content"></div>
-    </div>
+    <div id="highscore-container" style="display: none;">
+
+      </div>
+
+
+
 
     <div id="achievement-popup" class="achievement-popup">
         <div class="achievement-message">
@@ -44,17 +46,65 @@
         </div>
       </div>
 
-    <div id="achievements-container" style="display: none;">
-      <div id="achievement-tracker">
-        <h4>Achievements</h4>
-        <ul>
-          <li id="firstWin-tracker">Erster Sieg: <span class="status">Nicht erreicht</span></li>
-          <li id="fastWin-tracker">Schnellster Sieg: <span class="status">Nicht erreicht</span></li>
-          <li id="perfectWin-tracker">Perfekter Sieg: <span class="status">Nicht erreicht</span></li>
-          <li id="levelUp-tracker">Level-up: <span class="status">Nicht erreicht</span></li>
-        </ul>
-      </div>
+      <div id="achievements-container" style="display: none;">
+        <div id="achievement-tracker" class="achievements-wrapper">
+    
+            <div class="achievement-list">
+                <div class="achievement" id="firstWin-tracker">
+                    <img src="img/achievements/trophy_notarchieved.jpg" alt="First Win">
+                    <div class="achievement-info">
+                        <h5>First Win</h5>
+                        <p>Status: <span class="status">Not achieved</span></p>
+                    </div>
+                </div>
+                <div class="achievement" id="fastWin-tracker">
+                    <img src="img/achievements/speed_notarchieved.jpg" alt="Fastest Win">
+                    <div class="achievement-info">
+                        <h5>Fastest Win</h5>
+                        <p>Status: <span class="status">Not achieved</span></p>
+                    </div>
+                </div>
+                <div class="achievement" id="perfectWin-tracker">
+                    <img src="img/achievements/star_notarchieved.jpg" alt="Perfect Win">
+                    <div class="achievement-info">
+                        <h5>Perfect Win</h5>
+                        <p>Status: <span class="status">Not achieved</span></p>
+                    </div>
+                </div>
+                <div class="achievement" id="levelUp-tracker">
+                    <img src="img/achievements/level-up_notarchieved.jpg" alt="Level-up">
+                    <div class="achievement-info">
+                        <h5>Level-up</h5>
+                        <p>Status: <span class="status">Not achieved</span></p>
+                    </div>
+                </div>
+                <div class="achievement" id="level1Win5-tracker">
+                    <img src="img/achievements/medal_notarchieved.jpg" alt="Win 5x Level 1">
+                    <div class="achievement-info">
+                        <h5>Win 5x Level 1</h5>
+                        <p>Status: <span class="status">Not achieved</span></p>
+                    </div>
+                </div>
+                <div class="achievement" id="speedWinLevel1-tracker">
+                    <img src="img/achievements/stopwatch_notarchieved.jpg" alt="Win Level 1 in under 30 seconds">
+                    <div class="achievement-info">
+                        <h5>Win Level 1 in under 30 seconds</h5>
+                        <p>Status: <span class="status">Not achieved</span></p>
+                    </div>
+                </div>
+                <div class="achievement" id="noMistakesLevel1-tracker">
+                    <img src="img/achievements/checkmark_notarchieved.jpg" alt="Win Level 1 without mistakes">
+                    <div class="achievement-info">
+                        <h5>Win Level 1 without mistakes</h5>
+                        <p>Status: <span class="status">Not achieved</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
+      
 
     <div id="settings-container" style="display: none;">
         <h2>Game Settings</h2>

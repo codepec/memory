@@ -1,26 +1,51 @@
-function showAchievementPopup(achievement) {
-    let popup = document.getElementById('achievement-popup');
-    let achievementText = document.getElementById('achievement-text');
-
-    switch (achievement) {
-        case 'firstWin':
-            achievementText.textContent = "Gratulation! Du hast deinen ersten Sieg errungen!";
-            break;
-        case 'fastWin':
-            achievementText.textContent = "Schnell! Du hast ein Level in weniger als 1 Minute abgeschlossen!";
-            break;
-        case 'perfectWin':
-            achievementText.textContent = "Perfekt! Du hast das Level ohne Fehler abgeschlossen!";
-            break;
-        case 'levelUp':
-            achievementText.textContent = "Level-up! Du bist auf das nächste Level aufgestiegen!";
-            break;
-        default:
-            achievementText.textContent = "Du hast ein Achievement freigeschaltet!";
+function checkAchievements() {
+    const elapsedTime = parseInt(timeElement.textContent);
+  
+    // Beispielbedingungen für Achievements:
+    if (matches === cards.length / 2) {
+      unlockAchievement("firstWin-tracker", "Erster Sieg");
     }
+    if (elapsedTime <= 30) {
+      unlockAchievement("fastWin-tracker", "Schnellster Sieg");
+    }
+    if (matches === cards.length / 2 && flippedIndexes.length === 0) {
+      unlockAchievement("perfectWin-tracker", "Perfekter Sieg");
+    }
+    if (currentLevel > 1) {
+      unlockAchievement("levelUp-tracker", "Level-up");
+    }
+  }
+  
+  function unlockAchievement(achievementId, achievementText) {
+    const achievementElement = document.getElementById(achievementId);
+    
+    if (achievementElement && achievementElement.querySelector(".status").textContent === "Nicht erreicht") {
+      // Markiere das Achievement als erreicht
+      achievementElement.querySelector(".status").textContent = "Erreicht";
+      
+      // Zeige ein Popup an
+      showAchievementPopup(achievementText);
+    }
+  }
 
-    popup.style.display = 'block';
-}
+  
+
+  function showAchievementPopup(achievementText) {
+    const popup = document.getElementById("achievement-popup");
+    const popupText = document.getElementById("achievement-text");
+    
+    popupText.textContent = achievementText;
+    popup.style.display = "block";
+  
+    // Schließt das Popup nach 3 Sekunden automatisch
+    setTimeout(closeAchievementPopup, 3000);
+  }
+  
+  function closeAchievementPopup() {
+    const popup = document.getElementById("achievement-popup");
+    popup.style.display = "none";
+  }
+  
 
 function closeAchievementPopup() {
     document.getElementById('achievement-popup').style.display = 'none';

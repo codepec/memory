@@ -17,7 +17,7 @@ const newGameBtn = document.getElementById("new-game-btn");
 const highscoreList = document.getElementById("highscore-list");
 const levelContainer = document.getElementById("level-container");
 const showAchievementsContainer = document.getElementById("achievements-container");
-
+const highscoreContainer = document.getElementById("highscore-container");
 const settingsContainer = document.getElementById("settings-container");
 const gameContainer = document.getElementById("game-container");
 const headerContainer = document.getElementById("header-container");
@@ -38,6 +38,9 @@ function updateStopwatch() {
 function endGame() {
   clearInterval(stopwatchInterval);
   const elapsedTime = parseInt(timeElement.textContent);
+
+  checkAchievements(); // Überprüfe Achievements
+
   const highscores = JSON.parse(localStorage.getItem("highscores")) || [];
   const placement = getPlacement(highscores, elapsedTime);
 
@@ -221,7 +224,7 @@ function showAchievements(){
   gameContainer.style.display = "none";
   settingsContainer.style.display = "none";
   showAchievementsContainer.style.display = "block";
-
+  highscoreContainer.style.display ="none";
 }
 
 // Function to show the level selection menu
@@ -230,6 +233,7 @@ function showLevels() {
   gameContainer.style.display = "none";
   settingsContainer.style.display = "none";
   showAchievementsContainer.style.display = "none";
+  highscoreContainer.style.display ="none";
 }
 
 function showSettings() {
@@ -237,7 +241,7 @@ function showSettings() {
   gameContainer.style.display = "none";
   settingsContainer.style.display = "block";
   showAchievementsContainer.style.display = "none";
-
+  highscoreContainer.style.display ="none";
 }
 
 function showGameTable() {
@@ -245,14 +249,23 @@ function showGameTable() {
   levelContainer.style.display = "none";
   settingsContainer.style.display = "none";
   showAchievementsContainer.style.display = "none";
-
+  highscoreContainer.style.display ="none";
 }
 
 function showHighscores() {
-  // Initialisiere das Highscore-Inhaltsformat
-  let content = '<h2>Highscores</h2>';
+  displayHighscores();
+  gameContainer.style.display = "none";
+  levelContainer.style.display = "none";
+  settingsContainer.style.display = "none";
+  showAchievementsContainer.style.display = "none";
+  highscoreContainer.style.display ="block";
+}
+
+function displayHighscores() {
+  // Initialize the highscore content format
+  let content = '';
   
-  // Iteriere durch alle Levels und füge Highscores hinzu
+  // Loop through all levels and add the highscores
   for (let level = 1; level <= 5; level++) {
     const levelKey = `highscores_level_${level}`;
     const highscores = JSON.parse(localStorage.getItem(levelKey)) || [];
@@ -262,17 +275,44 @@ function showHighscores() {
     if (highscores.length === 0) {
       content += '<p>No highscores available!</p>';
     } else {
-      content += '<ul>';
-      highscores.forEach((score) => {
-        content += `<li> ${score.score.toFixed(0)} (${score.time} seconds)</li>`;
+      // HTML table for displaying the highscores
+      content += `
+        <table class="highscore-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Seconds</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      highscores.forEach((score, index) => {
+        content += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${score.time} seconds</td>
+            <td>${score.score.toFixed(0)}</td>
+          </tr>
+        `;
       });
-      content += '</ul>';
+      content += '</tbody></table>';
     }
   }
   
-  // Zeige die Inhalte im Modal an
-  openModal(content);
+  // Insert the highscore content directly into the container
+  document.getElementById('highscore-container').innerHTML = content;
 }
+
+
+// Safe function to insert HTML content into an element
+function safeInsertHTML(element, htmlContent) {
+  // Ensure content is parsed properly and safely inserted into the DOM
+  const doc = new DOMParser().parseFromString(htmlContent, "text/html");
+  element.innerHTML = doc.body.innerHTML;  // Safe HTML injection
+}
+
+
 
 
 function formatHighscore(score) {
@@ -342,28 +382,5 @@ function updateLevel(level) {
 }
 
 
-function updateHighscoreDisplay() {
-  for (let level = 1; level <= 5; level++) {
-    const levelKey = `highscores_level_${level}`;
-    const highscores = JSON.parse(localStorage.getItem(levelKey)) || [];
-    
-    // Bestimmen des besten Scores (höchster Wert)
-    let bestScore = "No highscore yet"; // Standardwert, falls keine Highscores existieren
-    if (highscores.length > 0) {
-      bestScore = `${highscores[0].score.toFixed(0)}`;
-    }
 
-    // Aktualisieren des HTML-Elements
-    const highscoreElement = document.getElementById(`level-highscore-${level}`);
-    if (highscoreElement) {
-      highscoreElement.innerHTML = `Highscore: <b>${bestScore}</b>`;
-    }
-  }
-}
 
-// Beispiel: Highscore für alle Levels laden
-updateHighscoreDisplay();
-
-function displayHighscores(){
-  console.log(bestScore);
-}
