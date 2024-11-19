@@ -216,8 +216,9 @@ function selectLevel(level) {
 
 function startNewGame() {
   location.reload();
-
 }
+
+
 
 function showAchievements(){
   levelContainer.style.display = "none";
@@ -380,6 +381,71 @@ function updateLevel(level) {
       break;
   }
 }
+
+
+function clearContainer(container) {
+  while (container.firstChild) {
+      container.removeChild(container.firstChild);
+  }
+}
+
+function updateStars(score, level) {
+  const starContainer = document.getElementById(`score-stars-container-level-${level}`);
+  if (!starContainer) return; // Abbrechen, falls der Container nicht gefunden wird
+
+  // Sicheres Entfernen aller Kinder
+  clearContainer(starContainer);
+
+  let starCount = 0;
+  if (score > 30000) {
+      starCount = 3;
+  } else if (score > 20000) {
+      starCount = 2;
+  } else if (score > 10000) {
+      starCount = 1;
+  }
+
+  // Sterne generieren und einfügen
+  for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('img');
+      star.src = 'img/stars/star_full.png'; // Pfad zum Bild der Sterne
+      star.alt = 'Star';
+      star.classList.add('star-icon'); // Optional: CSS-Klasse hinzufügen
+      starContainer.appendChild(star);
+  }
+}
+
+
+
+
+
+
+function updateHighscoreDisplay() {
+  for (let level = 1; level <= 5; level++) {
+    const levelKey = `highscores_level_${level}`;
+    const highscores = JSON.parse(localStorage.getItem(levelKey)) || [];
+    
+    // Bestimmen des besten Scores (höchster Wert)
+    let bestScore = "No highscore yet"; // Standardwert, falls keine Highscores existieren
+    if (highscores.length > 0) {
+      bestScore = `${highscores[0].score.toFixed(0)}`;
+    }
+
+    updateStars(bestScore, level);
+
+    // Aktualisieren des HTML-Elements
+    const highscoreElement = document.getElementById(`level-highscore-${level}`);
+    if (highscoreElement) {
+      highscoreElement.innerHTML = `Highscore: <b>${bestScore}</b>`;
+
+    }
+    
+  }
+}
+
+
+updateHighscoreDisplay();
+
 
 
 

@@ -283,3 +283,21 @@ body {
 
 
 
+.score-stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.score-stars img {
+    width: 30px;
+    height: 30px;
+}
+
+.star-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
