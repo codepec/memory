@@ -1,6 +1,7 @@
 #highscore-container {
     text-align: center;
     color: black;
+    width: 90%;
 }
 
 #highscore-container h2 {
