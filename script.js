@@ -519,7 +519,7 @@ function checkFastestWinAchievement() {
     
     // Ändere das Bild des Erfolges auf das erreichte Bild
     achievementImage.src = "img/achievements/speed_achieved.jpg";
-    console.log("Fastest win achievement unlocked!"); // Debugging-Ausgabe
+    //console.log("Fastest win achievement unlocked!"); // Debugging-Ausgabe
   } else {
     // Achievement nicht erreicht
     achievementElementFastWin.textContent = "Not Achieved";
@@ -530,6 +530,38 @@ function checkFastestWinAchievement() {
   }
 
   //console.log(achievementElementFastWin.textContent); // Debugging-Ausgabe
+}
+
+
+//Win 5x Level 1
+function checkWin5xLevel1Achievement() {
+  const achievementElementWin5xLevel1 = document.getElementById("level1Win5");
+  const achievementImage = document.querySelector("#level1Win5-tracker img");
+
+  // Beste Zeit für Level 1 aus dem localStorage holen (angenommen, es handelt sich um eine Zeit in Sekunden)
+  const highscores5Times = JSON.parse(localStorage.getItem("highscores_level_1")).length || null;
+
+  //console.log(highscores5Times); // Debugging-Ausgabe
+
+  // Überprüfen, ob eine Zeit vorhanden ist und ob sie unter 30 Sekunden liegt
+  if (highscores5Times !== null && highscores5Times > 4) {
+    // Achievement erreicht (unter 30 Sekunden)
+    achievementElementWin5xLevel1.textContent = "Achieved";
+    achievementElementWin5xLevel1.style.color = "#28a745";  // Erfolg (grün)
+    
+    // Ändere das Bild des Erfolges auf das erreichte Bild
+    achievementImage.src = "img/achievements/medal_achieved.jpg";
+    //console.log("level1Win5 achievement unlocked!"); // Debugging-Ausgabe
+  } else {
+    // Achievement nicht erreicht
+    achievementElementWin5xLevel1.textContent = "Not Achieved";
+    achievementElementWin5xLevel1.style.color = "crimson";  // Nicht erreicht (rot)
+    
+    // Bild bleibt auf nicht erreicht
+    achievementImage.src = "img/achievements/medal_notachieved.jpg";
+  }
+
+  //console.log(achievementElementWin5xLevel1.textContent); // Debugging-Ausgabe
 }
 
 
@@ -612,4 +644,5 @@ document.addEventListener("DOMContentLoaded", function() {
   checkAchievements();
   checkFirstWinAchievement();
   checkFastestWinAchievement();
+  checkWin5xLevel1Achievement();
 });
