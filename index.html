@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <script type="text/javascript" defer src="script.js"></script>
-    <script type="text/javascript" defer src="settings.js"></script>
-    <script type="text/javascript" defer src="achievement.js"></script>
     <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="achievement.css">
     <link rel="stylesheet" href="highscore.css">
-
+    
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-
     <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
     <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192x192.png">
@@ -21,22 +17,194 @@
     <link rel="apple-touch-icon" sizes="384x384" href="icons/icon-384x384.png">
     <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512x512.png">
     
+
+    <style>
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color: var(--navbar-bg);
+    padding: 10px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.menu-option {
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.menu-option:hover {
+    color: var(--highlight-color);
+}
+
+
+
+        #loading-page {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        
+
+        #loading-page.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Spinner Overlay */
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+
+        /* Spinner Animation */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff; /* White color for spinner */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Animation for spinning effect */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* To hide the spinner when page is loaded */
+        .spinner-overlay.hide {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+      </style>
+
+
+
     <title>Memory Game</title>
 </head>
 <body>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="spinner-overlay">
+        <div class="spinner"></div>
+    </div>
+
     <div class="menu-bar">
         <div class="menu-option" onclick="startNewGame()">New Game</div>
         <div class="menu-option" onclick="showHighscores()">Highscores</div>
         <div class="menu-option" onclick="showAchievements()">Goals</div>
         <div class="menu-option" onclick="showSettings()">Settings</div>
     </div>
+    <div id="loading-page" class="page-overlay"></div>
+    <div id="level-container">
+        <!-- Level 1 -->
+        <button class="level-button level-1" onclick="selectLevel(1)">
+            <div class="level-stats">
+                <p class="level-label">Level 1: Jungle</p>
+                <p class="level-label-highscore" id="level-highscore-1">Highscore: 123456</p>
+            </div>
+            
+            <div id="score-stars-container-level-1"></div>
+
+            <img src="img/1/1.jpg" loading="lazy" alt="Jungle" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Welcome to the jungle, where leaves whisper, shadows dance, and wild animals hide.</p>
+            </div>
+            <span class="enter-level">Enter the Jungle</span>
+        </button>
+    
+        <!-- Level 2 -->
+        <button class="level-button level-2" onclick="selectLevel(2)">
+            <div class="level-stats">
+                <p class="level-label">Level 2: Fantasy</p>
+                <p class="level-label-highscore" id="level-highscore-2">Highscore: 789012</p>
+            </div>
+            <div id="score-stars-container-level-2"></div>
+            <img src="img/2/1.jpg" loading="lazy" alt="Fantasy" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Welcome to the world of fantasy, where magic fills the air and dragons soar through the clouds.</p>
+            </div>
+            <span class="enter-level">Enter the Fantasy Universe</span>
+        </button>
+    
+        <!-- Level 3 -->
+        <button class="level-button level-3" onclick="selectLevel(3)">
+            <div class="level-stats">
+                <p class="level-label">Level 3: Space</p>
+                <p class="level-label-highscore" id="level-highscore-3">Highscore: 345678</p>
+            </div>
+            <div id="score-stars-container-level-3"></div>
+            <img src="img/3/1.jpg" loading="lazy" alt="Space" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Welcome to the infinite universe, where stars illuminate your journey and planets await.</p>
+            </div>
+            <span class="enter-level">Enter the Cosmos</span>
+        </button>
+    
+        <!-- Level 4 -->
+        <button class="level-button level-4" onclick="selectLevel(4)">
+            <div class="level-stats">
+                <p class="level-label">Level 4: Underwater</p>
+                <p class="level-label-highscore" id="level-highscore-4">Highscore: 901234</p>
+            </div>
+            <div id="score-stars-container-level-4"></div>
+            <img src="img/4/1.jpg" loading="lazy" alt="Underwater" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Welcome to the underwater world, where coral reefs bloom and fish glide through the oceans.</p>
+            </div>
+            <span class="enter-level">Enter the Underwater World</span>
+        </button>
+    
+        <!-- Level 5 -->
+        <button class="level-button level-5" onclick="selectLevel(5)">
+            <div class="level-stats">
+                <p class="level-label">Level 5: Desert</p>
+                <p class="level-label-highscore" id="level-highscore-5">Highscore: 567890</p>
+            </div>
+            <div id="score-stars-container-level-5"></div>
+            <img src="img/5/1.jpg" loading="lazy" alt="Desert" class="level-portrait">
+            <div class="level-info">
+                <p class="level-description">Welcome to the endless desert, where the sand glows and the sunlight enchants the landscape.</p>
+            </div>
+            <span class="enter-level">Enter the Desert</span>
+        </button>
+    </div>
 
     <div id="highscore-container" style="display: none;">
-
-      </div>
-
-
-
+      <!-- Highscores will be displayed here -->
+    </div>
 
     <div id="achievement-popup" class="achievement-popup">
         <div class="achievement-message">
@@ -44,68 +212,65 @@
           <p id="achievement-text"></p>
           <button onclick="closeAchievementPopup()">Close</button>
         </div>
-      </div>
+    </div>
 
-      <div id="achievements-container" style="display: none;">
+
+    <div id="achievements-container" style="display: none;">
         <div id="achievement-tracker" class="achievements-wrapper">
-    
             <div class="achievement-list">
                 <div class="achievement" id="firstWin-tracker">
-                    <img src="img/achievements/trophy_notarchieved.jpg" alt="First Win">
+                    <img src="img/achievements/trophy_notachieved.jpg" loading="lazy" alt="First Win">
                     <div class="achievement-info">
                         <h5>First Win</h5>
-                        <p>Status: <span class="status">Not achieved</span></p>
+                        <p>Status: <span id="firstWin" class="status">Not achieved</span></p>
                     </div>
                 </div>
                 <div class="achievement" id="fastWin-tracker">
-                    <img src="img/achievements/speed_notarchieved.jpg" alt="Fastest Win">
+                    <img src="img/achievements/speed_notachieved.jpg" loading="lazy" alt="Fastest Win">
                     <div class="achievement-info">
                         <h5>Fastest Win</h5>
-                        <p>Status: <span class="status">Not achieved</span></p>
+                        <p>Status: <span id="fastWin" class="status">Not achieved</span></p>
                     </div>
                 </div>
                 <div class="achievement" id="perfectWin-tracker">
-                    <img src="img/achievements/star_notarchieved.jpg" alt="Perfect Win">
+                    <img src="img/achievements/star_notachieved.jpg" loading="lazy" alt="Perfect Win">
                     <div class="achievement-info">
                         <h5>Perfect Win</h5>
-                        <p>Status: <span class="status">Not achieved</span></p>
+                        <p>Status: <span id="perfectWin" class="status">Not achieved</span></p>
                     </div>
                 </div>
                 <div class="achievement" id="levelUp-tracker">
-                    <img src="img/achievements/level-up_notarchieved.jpg" alt="Level-up">
+                    <img src="img/achievements/level-up_notachieved.jpg" loading="lazy" alt="Level-up">
                     <div class="achievement-info">
                         <h5>Level-up</h5>
-                        <p>Status: <span class="status">Not achieved</span></p>
+                        <p>Status: <span id="levelUp" class="status">Not achieved</span></p>
                     </div>
                 </div>
                 <div class="achievement" id="level1Win5-tracker">
-                    <img src="img/achievements/medal_notarchieved.jpg" alt="Win 5x Level 1">
+                    <img src="img/achievements/medal_notachieved.jpg" loading="lazy" alt="Win 5x Level 1">
                     <div class="achievement-info">
                         <h5>Win 5x Level 1</h5>
-                        <p>Status: <span class="status">Not achieved</span></p>
+                        <p>Status: <span id="level1Win5" class="status">Not achieved</span></p>
                     </div>
                 </div>
                 <div class="achievement" id="speedWinLevel1-tracker">
-                    <img src="img/achievements/stopwatch_notarchieved.jpg" alt="Win Level 1 in under 30 seconds">
+                    <img src="img/achievements/stopwatch_notachieved.jpg" loading="lazy" alt="Win Level 1 in under 30 seconds">
                     <div class="achievement-info">
                         <h5>Win Level 1 in under 30 seconds</h5>
-                        <p>Status: <span class="status">Not achieved</span></p>
+                        <p>Status: <span id="speedWinLevel1" class="status">Not achieved</span></p>
                     </div>
                 </div>
                 <div class="achievement" id="noMistakesLevel1-tracker">
-                    <img src="img/achievements/checkmark_notarchieved.jpg" alt="Win Level 1 without mistakes">
+                    <img src="img/achievements/checkmark_notachieved.jpg" loading="lazy" alt="Win Level 1 without mistakes">
                     <div class="achievement-info">
                         <h5>Win Level 1 without mistakes</h5>
-                        <p>Status: <span class="status">Not achieved</span></p>
+                        <p>Status: <span id="noMistakesLevel1" class="status">Not achieved</span></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    
-      
-
     <div id="settings-container" style="display: none;">
         <h2>Game Settings</h2>
         
@@ -144,86 +309,8 @@
         <div class="setting-option">
             <button id="save-settings-btn" onclick="saveSettings()">Save Settings</button>
         </div>
-
     </div>
     
-    
-
-    <div id="level-container">
-        <!-- Level 1 -->
-        <button class="level-button level-1" onclick="selectLevel(1)">
-            <div class="level-stats">
-                <p class="level-label">Level 1: Jungle</p>
-                <p class="level-label-highscore" id="level-highscore-1">Highscore: 123456</p>
-            </div>
-            
-            <div id="score-stars-container-level-1"></div>
-
-            <img src="img/1/1.jpg" alt="Jungle" class="level-portrait">
-            <div class="level-info">
-                <p class="level-description">Welcome to the jungle, where leaves whisper, shadows dance, and wild animals hide.</p>
-            </div>
-            <span class="enter-level">Enter the Jungle</span>
-        </button>
-    
-        <!-- Level 2 -->
-        <button class="level-button level-2" onclick="selectLevel(2)">
-            <div class="level-stats">
-                <p class="level-label">Level 2: Fantasy</p>
-                <p class="level-label-highscore" id="level-highscore-2">Highscore: 789012</p>
-            </div>
-            <div id="score-stars-container-level-2"></div>
-            <img src="img/2/1.jpg" alt="Fantasy" class="level-portrait">
-            <div class="level-info">
-                <p class="level-description">Welcome to the world of fantasy, where magic fills the air and dragons soar through the clouds.</p>
-            </div>
-            <span class="enter-level">Enter the Fantasy Universe</span>
-        </button>
-    
-        <!-- Level 3 -->
-        <button class="level-button level-3" onclick="selectLevel(3)">
-            <div class="level-stats">
-                <p class="level-label">Level 3: Space</p>
-                <p class="level-label-highscore" id="level-highscore-3">Highscore: 345678</p>
-            </div>
-            <div id="score-stars-container-level-3"></div>
-            <img src="img/3/1.jpg" alt="Space" class="level-portrait">
-            <div class="level-info">
-                <p class="level-description">Welcome to the infinite universe, where stars illuminate your journey and planets await.</p>
-            </div>
-            <span class="enter-level">Enter the Cosmos</span>
-        </button>
-    
-        <!-- Level 4 -->
-        <button class="level-button level-4" onclick="selectLevel(4)">
-            <div class="level-stats">
-                <p class="level-label">Level 4: Underwater</p>
-                <p class="level-label-highscore" id="level-highscore-4">Highscore: 901234</p>
-            </div>
-            <div id="score-stars-container-level-4"></div>
-            <img src="img/4/1.jpg" alt="Underwater" class="level-portrait">
-            <div class="level-info">
-                <p class="level-description">Welcome to the underwater world, where coral reefs bloom and fish glide through the oceans.</p>
-            </div>
-            <span class="enter-level">Enter the Underwater World</span>
-        </button>
-    
-        <!-- Level 5 -->
-        <button class="level-button level-5" onclick="selectLevel(5)">
-            <div class="level-stats">
-                <p class="level-label">Level 5: Desert</p>
-                <p class="level-label-highscore" id="level-highscore-5">Highscore: 567890</p>
-            </div>
-            <div id="score-stars-container-level-5"></div>
-            <img src="img/5/1.jpg" alt="Desert" class="level-portrait">
-            <div class="level-info">
-                <p class="level-description">Welcome to the endless desert, where the sand glows and the sunlight enchants the landscape.</p>
-            </div>
-            <span class="enter-level">Enter the Desert</span>
-        </button>
-    </div>
-    
-
     <div id="game-container" style="display: none;">
         <h1 class="center" id="choosenLevel"></h1>
         <div class="animated fadeIn center" id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
@@ -238,5 +325,10 @@
         <div id="level-list"></div>
         <p class="center">by codepec</p>
     </div>
+
+</div>
+
+    <script type="text/javascript" src="script.js" defer></script>
+    <script type="text/javascript" src="settings.js" defer></script>
 </body>
 </html>

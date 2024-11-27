@@ -24,6 +24,8 @@ const headerContainer = document.getElementById("header-container");
 
 let stopwatchInterval;
 
+
+
 function startStopwatch() {
   startTime = Date.now();
   stopwatchInterval = setInterval(updateStopwatch, 1000);
@@ -38,9 +40,6 @@ function updateStopwatch() {
 function endGame() {
   clearInterval(stopwatchInterval);
   const elapsedTime = parseInt(timeElement.textContent);
-
-  checkAchievements(); // Überprüfe Achievements
-
   const highscores = JSON.parse(localStorage.getItem("highscores")) || [];
   const placement = getPlacement(highscores, elapsedTime);
 
@@ -62,7 +61,7 @@ function getPlacement(highscores, currentTime) {
 function addToHighscore(time) {
   const levelKey = `highscores_level_${currentLevel}`;  // Key for each level
   const highscores = JSON.parse(localStorage.getItem(levelKey)) || [];
-  
+    
   // Create a score object with the level and time
   const score = { time: time, score: generateScore(time) };
   
@@ -79,8 +78,9 @@ function addToHighscore(time) {
   
   // Save the updated highscores array for the current level
   localStorage.setItem(levelKey, JSON.stringify(highscores));
-}
 
+
+}
 
 function generateScore(time) {
   // Beispiel für eine einfache Formel zur Erzeugung des Highscore-Werts
@@ -444,9 +444,172 @@ function updateHighscoreDisplay() {
 }
 
 
-updateHighscoreDisplay();
 
 
 
 
 
+
+//Achievements
+
+function checkAchievements() {
+  const elapsedTime = parseInt(timeElement.textContent);
+
+
+
+
+  // Beispielbedingungen für Achievements:
+  if (matches === cards.length / 2) {
+      unlockAchievement("firstWin-tracker", "Erster Sieg");
+  }
+  if (elapsedTime <= 30) {
+      unlockAchievement("fastWin-tracker", "Schnellster Sieg");
+  }
+  if (matches === cards.length / 2 && flippedIndexes.length === 0) {
+      unlockAchievement("perfectWin-tracker", "Perfekter Sieg");
+  }
+  if (currentLevel > 1) {
+      unlockAchievement("levelUp-tracker", "Level-up");
+  }
+}
+
+
+//First Win Level 1
+function checkFirstWinAchievement() {
+  const achievementElementFirstWin = document.getElementById("firstWin");
+  const achievementImage = document.querySelector("#firstWin-tracker img");
+
+  const highscores = JSON.parse(localStorage.getItem("highscores_level_1")) || [];
+
+  // Wenn ein Highscore für Level 1 vorhanden ist, markiere den Erfolg
+  if (highscores.length > 0) {
+    achievementElementFirstWin.textContent = "Achieved";
+    achievementElementFirstWin.style.color = "#28a745";  // Erfolg (grün)
+    
+    // Ändere das Bild des Erfolges auf das erreichte Bild
+    achievementImage.src = "img/achievements/trophy_achieved.jpg";
+    //console.log("First win achievement unlocked!");
+  } else {
+    achievementElementFirstWin.textContent = "Not Achieved";
+    achievementElementFirstWin.style.color = "crimson";  // Nicht erreicht (rot)
+    
+    // Bild bleibt auf nicht erreicht
+    achievementImage.src = "img/achievements/trophy_notachieved.jpg";
+  }
+
+  //console.log(achievementElementFirstWin.textContent); // Debugging-Ausgabe
+}
+
+
+//Fastes Win Level 1
+function checkFastestWinAchievement() {
+  const achievementElementFastWin = document.getElementById("fastWin");
+  const achievementImage = document.querySelector("#fastWin-tracker img");
+
+  // Beste Zeit für Level 1 aus dem localStorage holen (angenommen, es handelt sich um eine Zeit in Sekunden)
+  const highscoresBestTime = JSON.parse(localStorage.getItem("highscores_level_1"))[0].time || null;
+
+  console.log(highscoresBestTime); // Debugging-Ausgabe
+
+  // Überprüfen, ob eine Zeit vorhanden ist und ob sie unter 30 Sekunden liegt
+  if (highscoresBestTime !== null && highscoresBestTime < 30) {
+    // Achievement erreicht (unter 30 Sekunden)
+    achievementElementFastWin.textContent = "Achieved";
+    achievementElementFastWin.style.color = "#28a745";  // Erfolg (grün)
+    
+    // Ändere das Bild des Erfolges auf das erreichte Bild
+    achievementImage.src = "img/achievements/speed_achieved.jpg";
+    console.log("Fastest win achievement unlocked!"); // Debugging-Ausgabe
+  } else {
+    // Achievement nicht erreicht
+    achievementElementFastWin.textContent = "Not Achieved";
+    achievementElementFastWin.style.color = "crimson";  // Nicht erreicht (rot)
+    
+    // Bild bleibt auf nicht erreicht
+    achievementImage.src = "img/achievements/speed_notachieved.jpg";
+  }
+
+  //console.log(achievementElementFastWin.textContent); // Debugging-Ausgabe
+}
+
+
+//Perfect Win
+//Level-up
+//Win 5x Level 1
+//Win Level 1 in under 30 seconds
+//Win Level 1 without mistakes
+
+//Play all Levels
+//Win with <30 clicks
+//Win with <20 clicks
+
+//etc
+
+//baue clicks ein
+//bau click anzeige ein
+
+
+
+
+function unlockAchievement(achievementId, achievementText) {
+  const achievementElement = document.getElementById(achievementId);
+  
+  if (achievementElement && achievementElement.querySelector(".status").textContent === "Nicht erreicht") {
+      // Markiere das Achievement als erreicht
+      achievementElement.querySelector(".status").textContent = "Erreicht";
+    
+      // Zeige ein Popup an
+      showAchievementPopup(achievementText);
+  }
+}
+
+function showAchievementPopup(achievementText) {
+  const popup = document.getElementById("achievement-popup");
+  const popupText = document.getElementById("achievement-text");
+  
+  popupText.textContent = achievementText;
+  popup.style.display = "block";
+
+  // Schließt das Popup nach 3 Sekunden automatisch
+  setTimeout(closeAchievementPopup, 3000);
+}
+
+function closeAchievementPopup() {
+  const popup = document.getElementById("achievement-popup");
+  popup.style.display = "none";
+}
+
+function updateAchievementTracker() {
+  if (achievements.firstWin) {
+      document.getElementById('firstWin-tracker').querySelector('.status').textContent = 'Erreicht';
+      document.getElementById('firstWin-tracker').querySelector('.status').classList.add('achieved');
+  }
+  if (achievements.fastWin) {
+      document.getElementById('fastWin-tracker').querySelector('.status').textContent = 'Erreicht';
+      document.getElementById('fastWin-tracker').querySelector('.status').classList.add('achieved');
+  }
+  if (achievements.perfectWin) {
+      document.getElementById('perfectWin-tracker').querySelector('.status').textContent = 'Erreicht';
+      document.getElementById('perfectWin-tracker').querySelector('.status').classList.add('achieved');
+  }
+  if (achievements.levelUp) {
+      document.getElementById('levelUp-tracker').querySelector('.status').textContent = 'Erreicht';
+      document.getElementById('levelUp-tracker').querySelector('.status').classList.add('achieved');
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // This event ensures the DOM content is ready before manipulation
+
+  const loadingSpinner = document.getElementById("loading-spinner");
+  loadingSpinner.classList.add("hide");
+
+  const loading = document.getElementById("loading-page");
+  loading.classList.add("visible");
+
+  updateHighscoreDisplay();
+  checkAchievements();
+  checkFirstWinAchievement();
+  checkFastestWinAchievement();
+});
