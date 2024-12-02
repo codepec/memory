@@ -8,11 +8,13 @@ let matches = 0;
 let startTime = 0;
 let endTime = 0;
 let isFlipping = false;
-let progressPercentage = 0; // Setze den Fortschritt zu Beginn auf 0
+let progressPercentage = 0; 
+let moves = 0;
 
 const progressBar = document.getElementById("progress-bar");
 const progressBarText = document.getElementById("progress-text");
 const timeElement = document.getElementById("time-value");
+const movesElement = document.getElementById("moves-value");
 const newGameBtn = document.getElementById("new-game-btn");
 const highscoreList = document.getElementById("highscore-list");
 const levelContainer = document.getElementById("level-container");
@@ -41,11 +43,26 @@ function endGame() {
   clearInterval(stopwatchInterval);
   const elapsedTime = parseInt(timeElement.textContent);
   const highscores = JSON.parse(localStorage.getItem("highscores")) || [];
-  const placement = getPlacement(highscores, elapsedTime);
+  const moves = parseInt(movesElement.textContent);
 
-  alert(
-    `Game Over!\nYour time: ${elapsedTime} seconds\nPlacement: ${placement}`
-  );
+  if (moves <= 15) {
+    alert(
+      `Legendary Performance! 🏆\nYou nailed it with only ${moves} moves!\nTime: ${elapsedTime} seconds\nYou're a true master!`
+    );
+  } else if (moves <= 25) {
+    alert(
+      `Amazing Job! 🌟\nYou completed the game with just ${moves} moves!\nTime: ${elapsedTime} seconds\nKeep up the great work!`
+    );
+  } else if (moves <= 40) {
+    alert(
+      `Great Effort! 👏\nYou finished the game in ${moves} moves.\nTime: ${elapsedTime} seconds\nPractice makes perfect!`
+    );
+  } else {
+    alert(
+      `You Did It! 🎉\nIt took ${moves} moves and ${elapsedTime} seconds to finish.\nTry again to beat your record!`
+    );
+  }
+
   newGameBtn.style.display = "block";
 
   addToHighscore(elapsedTime);
@@ -129,6 +146,10 @@ function checkMatch() {
   } else {
     setTimeout(resetCards, 1000);
   }
+
+  moves++;
+  movesElement.textContent = moves;
+
 }
 
 function disableCards() {
@@ -193,6 +214,8 @@ function startMemoryGame() {
   flippedCards = [];
   flippedIndexes = [];
   matches = 0;
+  moves = 0;
+  movesElement.textContent = moves;
   startStopwatch();
   progressPercentage = 0;
 }

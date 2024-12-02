@@ -312,8 +312,39 @@ body {
     </div>
     
     <div id="game-container" style="display: none;">
-        <h1 class="center" id="choosenLevel"></h1>
-        <div class="animated fadeIn center" id="stopwatch">Time: <span id="time-value">0</span> seconds</div>
+        <h2 class="center" id="choosenLevel"></h2>
+
+
+
+        <div class="stats">
+            <!-- Time stat -->
+            <div class="stat-item">
+                <div class="stat-label">Time</div>
+                <div class="stat-value big">
+                    <div class="stat-value mid">
+                        <div class="stat-value small">
+                            <div id="time-value">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Moves stat -->
+            <div class="stat-item">
+                <div class="stat-label">Moves</div>
+                <div class="stat-value big">
+                    <div class="stat-value mid">
+                        <div class="stat-value small">
+                            <div id="moves-value">0</div> <!-- Kleine Kreis für Moves -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+          
+
+        
         <div id="progress-container">
             <div id="progress-bar">
                 <span id="progress-text"></span>

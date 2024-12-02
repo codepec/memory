@@ -229,12 +229,89 @@ body {
     font-weight: bold;
 }
 
-#stopwatch {
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: var(--stopwatch-text);
-    text-shadow: 2px 2px 4px var(--stopwatch-shadow);
+.stats {
+    display: flex;
+    justify-content: space-around; /* Elemente nebeneinander */
+    align-items: center; /* Vertikale Zentrierung */
+    padding: 10px;
+    margin: 10px 0;
+    background: linear-gradient(145deg, rgba(36, 40, 59, 0.9), rgba(60, 68, 136, 0.9)); /* Schicker Farbverlauf */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); /* Coole Schatten */
+    font-size: 16px;
+    color: var(--text-color);
+    text-align: center;
+    gap: 20px; /* Abstand zwischen den Elementen */
+    animation: fadeIn 0.8s ease-out; /* Sanftes Erscheinen */
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 16px; /* Label-Größe */
+    margin-bottom: 10px; /* Abstand zwischen Label und Kreis */
+    color: var(--stopwatch-text);
+    font-weight: bold;
+}
+
+/* Äußere und mittlere Kreise */
+.stat-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Runde Form */
+    color: var(--text-color);
+    font-size: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1); /* Verblassender Schatten */
+}
+
+/* Vergrößerter äußeren Kreis für Time */
+.stat-value.big {
+    width: 80px; /* Große Kreise */
+    height: 80px;
+    background-color: rgba(12, 166, 193, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 35px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value.mid {
+    width: 70px; /* Mittlere Kreise */
+    height: 70px;
+    background-color: rgba(12, 166, 193, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 35px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value.small {
+    width: 60px; /* Kleine Kreise */
+    height: 60px;
+    background-color: rgb(12, 166, 193);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 35px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
 
 #progress-container {
     background-color: #2e7d32;
