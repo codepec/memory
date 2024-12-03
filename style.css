@@ -194,6 +194,7 @@ body {
     background-size: cover;
     background-position: center;
     box-shadow: 0 0 10px var(--card-shadow);
+    border-radius: 10px;
 }
 
 .carddisabled:hover {
@@ -231,19 +232,59 @@ body {
 
 .stats {
     display: flex;
-    justify-content: space-around; /* Elemente nebeneinander */
-    align-items: center; /* Vertikale Zentrierung */
-    padding: 10px;
-    margin: 10px 0;
-    background: linear-gradient(145deg, rgba(36, 40, 59, 0.9), rgba(60, 68, 136, 0.9)); /* Schicker Farbverlauf */
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 10px 15px;
+    margin-top: 60px;
+    margin-bottom: 10px;
+    background: linear-gradient(145deg, rgba(36, 40, 59, 0.9), rgba(60, 68, 136, 0.9));
     border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); /* Coole Schatten */
-    font-size: 16px;
-    color: var(--text-color);
-    text-align: center;
-    gap: 20px; /* Abstand zwischen den Elementen */
-    animation: fadeIn 0.8s ease-out; /* Sanftes Erscheinen */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    gap: 30px;
 }
+
+.level-container {
+    position: relative;
+    text-align: center;
+    flex: 0 0 auto;
+    z-index: 2; /* Ensure the level text is above the image */
+}
+
+.level-portrait-details {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid black;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: -50%; /* The image will be positioned above the container */
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1; /* Place the image behind the text */
+}
+
+#choosenLevel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    margin-top: 50px; /* Space below the image */
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--highlight-color);
+    position: relative;
+    z-index: 3; /* Make sure the level text is above the image */
+
+    width: 40px; /* Kleine Kreise */
+    height: 40px;
+    border-radius: 50%; /* Runde Form */
+    color: var(--text-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1); /* Verblassender Schatten */
+}
+
+
 
 @keyframes fadeIn {
     from {
@@ -268,7 +309,6 @@ body {
     color: var(--stopwatch-text);
     font-weight: bold;
 }
-
 /* Äußere und mittlere Kreise */
 .stat-value {
     display: flex;
@@ -282,25 +322,27 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1); /* Verblassender Schatten */
 }
 
-/* Vergrößerter äußeren Kreis für Time */
+/* Vergrößerter äußerer Kreis für Time */
 .stat-value.big {
     width: 80px; /* Große Kreise */
     height: 80px;
-    background-color: rgba(12, 166, 193, 0.2);
+    background-color: rgba(33, 150, 243, 0.2); /* Blau mit Transparenz */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 35px rgba(0, 0, 0, 0.1);
 }
 
+/* Mittlere Kreise */
 .stat-value.mid {
     width: 70px; /* Mittlere Kreise */
     height: 70px;
-    background-color: rgba(12, 166, 193, 0.5);
+    background-color: rgba(33, 150, 243, 0.5); /* Intensiveres Blau mit Transparenz */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 35px rgba(0, 0, 0, 0.1);
 }
 
+/* Kleine Kreise */
 .stat-value.small {
     width: 60px; /* Kleine Kreise */
     height: 60px;
-    background-color: rgb(12, 166, 193);
+    background-color: #2196F3; /* Reinblau */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 35px rgba(0, 0, 0, 0.1);
 }
 

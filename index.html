@@ -312,12 +312,15 @@ body {
     </div>
     
     <div id="game-container" style="display: none;">
-        <h3 class="center" id="choosenLevel"></h3>
+
+
+
+
 
 
 
         <div class="stats">
-            <!-- Time stat -->
+            <!-- Moves stat -->
             <div class="stat-item">
                 <div class="stat-label">Time</div>
                 <div class="stat-value big">
@@ -329,13 +332,19 @@ body {
                 </div>
             </div>
         
-            <!-- Moves stat -->
+            <!-- Level Portrait -->
+            <div class="level-container">
+                <img class="level-portrait-details" id="levelPortrait" src="img/1/1.jpg" alt="jungle">
+                <h3 class="center" id="choosenLevel">Jungle</h3>
+            </div>
+        
+            <!-- Time stat -->
             <div class="stat-item">
                 <div class="stat-label">Moves</div>
                 <div class="stat-value big">
                     <div class="stat-value mid">
                         <div class="stat-value small">
-                            <div id="moves-value">0</div> <!-- Kleine Kreis für Moves -->
+                            <div id="moves-value">0</div>
                         </div>
                     </div>
                 </div>
@@ -358,6 +367,13 @@ body {
     </div>
 
 </div>
+
+
+
+  
+  
+  
+  
 
     <script type="text/javascript" src="script.js" defer></script>
     <script type="text/javascript" src="settings.js" defer></script>

@@ -23,10 +23,18 @@ const highscoreContainer = document.getElementById("highscore-container");
 const settingsContainer = document.getElementById("settings-container");
 const gameContainer = document.getElementById("game-container");
 const headerContainer = document.getElementById("header-container");
+const levelPortrait = document.getElementById("levelPortrait");
+
 
 let stopwatchInterval;
 
-
+const levelData = {
+  1: { name: "Jungle" },
+  2: { name: "Desert" },
+  3: { name: "Mountain" },
+  4: { name: "Ocean" },
+  5: { name: "Forest" }
+};
 
 function startStopwatch() {
   startTime = Date.now();
@@ -47,19 +55,19 @@ function endGame() {
 
   if (moves <= 15) {
     alert(
-      `Legendary Performance! 🏆\nYou nailed it with only ${moves} moves!\nTime: ${elapsedTime} seconds\nYou're a true master!`
+      `${highscores}\n Legendary Performance! 🏆\nYou nailed it with only ${moves} moves!\nTime: ${elapsedTime} seconds\nYou're a true master!`
     );
   } else if (moves <= 25) {
     alert(
-      `Amazing Job! 🌟\nYou completed the game with just ${moves} moves!\nTime: ${elapsedTime} seconds\nKeep up the great work!`
+      `${highscores}\nAmazing Job! 🌟\nYou completed the game with just ${moves} moves!\nTime: ${elapsedTime} seconds\nKeep up the great work!`
     );
   } else if (moves <= 40) {
     alert(
-      `Great Effort! 👏\nYou finished the game in ${moves} moves.\nTime: ${elapsedTime} seconds\nPractice makes perfect!`
+      `${highscores}\nGreat Effort! 👏\nYou finished the game in ${moves} moves.\nTime: ${elapsedTime} seconds\nPractice makes perfect!`
     );
   } else {
     alert(
-      `You Did It! 🎉\nIt took ${moves} moves and ${elapsedTime} seconds to finish.\nTry again to beat your record!`
+      `${highscores}\nYou Did It! 🎉\nIt took ${moves} moves and ${elapsedTime} seconds to finish.\nTry again to beat your record!`
     );
   }
 
@@ -102,7 +110,7 @@ function addToHighscore(time) {
 function generateScore(time) {
   // Beispiel für eine einfache Formel zur Erzeugung des Highscore-Werts
   // Du kannst dies anpassen, um die Wertung nach deinen eigenen Kriterien zu berechnen
-  return (1 / time) * 100000 * Math.PI * Math.PI;
+  return (1 / Math.pow(time, 2)) * (1 / Math.pow(moves, 2)) * 10000 * Math.PI * Math.PI * 287630;
 }
 
 function flipCard() {
@@ -224,8 +232,12 @@ function startMemoryGame() {
 const choosenLevelElement = document.getElementById("choosenLevel");
 // Event listener for level selection
 function selectLevel(level) {
+    function getRandomImageNumber() {
+      return Math.floor(Math.random() * 9) + 1;
+  }
   currentLevel = level;
   updateLevel(currentLevel);
+  levelPortrait.src = `img/${currentLevel}/${getRandomImageNumber()}.jpg`;
   showGameTable();
   startMemoryGame(); // Start the game when a level is selected
   displayHighscores();
@@ -234,7 +246,7 @@ function selectLevel(level) {
   progressPercentage = (matches / (cards.length / 2)) * 100;
   progressBar.style.width = `${progressPercentage}%`;
   progressBarText.textContent = `${progressPercentage}%`;
-  choosenLevelElement.textContent = `Level ${currentLevel}`;
+  choosenLevelElement.textContent = `${currentLevel}`;
 }
 
 function startNewGame() {
